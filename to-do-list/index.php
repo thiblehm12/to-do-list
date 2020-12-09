@@ -14,7 +14,7 @@
 <body>
     <div class="navbar">
         <img src="images/logo1.png" class="logo">
-        <button id="btn1" type="button">Sign Up</button>
+        <button id="btn1" type="button" onclick="redirect()">Sign Up</button>
     </div>
     <div class="main-section">
         
@@ -161,6 +161,10 @@
         $("#slide").click( function() {
             $(".icon").toggleClass("close");
         });
+
+        function redirect() {
+            window.location = "signup.php";
+        }
     </script>
     
 </body>
