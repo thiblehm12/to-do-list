@@ -1,6 +1,5 @@
 <?php
     require 'db_conn.php';
-    session_start();
 ?>
 
 <!DOCTYPE html>
@@ -14,46 +13,30 @@
 </head>
 <body>
     <div class="navbar">
-        <img src="images/logo2.png" class="logo">
-        
-            <?php 
-                
-                if (isset($_SESSION["useruid"])) {
-                    echo '<button id="btn" type="button" onclick="redirect5()">Premium</button>';
-                }
-                else{
-                    echo '<button id="btn1" type="button" onclick="redirect()">Sign Up</button>';
-                }
-            ?>
-        
+        <img src="images/logo1.png" class="logo">
+        <button id="btn1" type="button">Sign Up</button>
     </div>
     <div class="main-section">
         
         <div class="add-section">
             <form action="app/add.php" method="POST" autocomplete="off">
-                <?php if(isset($_GET['mess']) && $_GET['mess'] == 'notconnected'){ ?>
+                <?php if(isset($_GET['mess']) && $_GET['mess'] == 'error'){ ?>
                     <input type="text" 
                     name="title"
                     style="border-color: #ff6666" 
-                    placeholder="You have to be connected !" />
+                    placeholder="This field is required" />
                     <button type="submit">Add &nbsp; <span>&#43</span></button>
-                <?php }elseif (isset($_GET['mess']) && $_GET['mess'] == 'error'){ ?>
-                    <input type="text" 
-                    name="title"
-                    style="border-color: #ff6666" 
-                    placeholder="This field is required !" />
-                    <button type="submit">Add &nbsp; <span>&#43</span></button>
-                    
+                
                 <?php }else { ?>
                     <input type="text" 
-                    name="title"
+                    name="title" 
                     placeholder="What do you need to do ?" />
                     <button type="submit">Add &nbsp; <span>&#43</span></button>
                 <?php } ?>  
-                <select name="lists">  
-                    <option value="list1" onClick="list1()" >List 1</option>  
-                    <option value="list2" onClick="list2()" >List 2</option> 
-                    <option value="list3" onClick="list3()" >List 3</option> 
+                <select>  
+                    <option value="List1">List 1</option>  
+                    <option value="List2">List 2</option> 
+                    <option value="List3">List 3</option> 
                 </select>    
             </form>
 
@@ -101,10 +84,29 @@
         </div>
         
     </div>
-    <?php
-        include_once 'sidebar.php';
-    ?>
-
+    <div id="side-bar">
+            <div class="toggle-btn" onclick="toggleSidebar()">
+                <div id="slide">
+                    <div class="circle icon">
+                        <span class="line top"></span>
+                        <span class="line middle"></span>
+                        <span class="line bottom"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="users">
+            <img src="images/image2.png"><p>User</p>
+            </div>
+            <div class="social-links">
+                <img src="images/fb.png"><p>Facebook</p>
+                <img src="images/ig.png"><p>Instagram</p>
+                <img src="images/tw.png"><p>Twitter</p>
+            </div>
+            <div class="useful-links">
+                <img src="images/share.png"><p>Partager</p>
+                <img src="images/info.png"><p>F.A.Q</p>
+            </div>
+        </div>
     <div class="bubbles">
             <img src="images/bubble.png">
             <img src="images/bubble.png">
@@ -115,7 +117,51 @@
             <img src="images/bubble.png">
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript" src="js/app.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $('.remove-to-do').click(function(){
+                const id = $(this).attr('id');
+                
+                $.post("app/remove.php",{ 
+                    id: id
+                },
+                (data) => {
+                    if(data) {
+                        $(this).parent().hide(600);
+                    }
+                }
+                );
+            });
+            $(".check-box").click(function(e){
+                const id =  $(this).attr('data-todo-id');
+                
+                $.post('app/check.php',
+                    {
+                        id: id 
+                    },
+                    (data) => {
+                        if(data != 'error'){
+                            const h2= $(this).next();
+                            if(data === '1'){
+                                h2.removeClass('checked');
+                            }else {
+                                h2.addClass('checked');
+                            }
+                        }
+                    }
+                );
+            });
+        });
+
+        function toggleSidebar(){
+            document.getElementById("side-bar").classList.toggle('active');
+        };
+
+        $("#slide").click( function() {
+            $(".icon").toggleClass("close");
+        });
+    </script>
     
 </body>
 </html>

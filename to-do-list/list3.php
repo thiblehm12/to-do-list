@@ -2,15 +2,15 @@
     require 'db_conn.php';
     session_start();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To-do List</title>
+    <title>List 3</title>
     <link rel="stylesheet" href="css/style.css">
     <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
 </head>
 <body>
     <div class="navbar">
@@ -53,7 +53,7 @@
                 <select name="lists">  
                     <option value="list1" onClick="list1()" >List 1</option>  
                     <option value="list2" onClick="list2()" >List 2</option> 
-                    <option value="list3" onClick="list3()" >List 3</option> 
+                    <option value="list3" onClick="list3()" selected>List 3</option> 
                 </select>    
             </form>
 
