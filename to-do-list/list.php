@@ -6,7 +6,7 @@ if(isset($_POST['lists'])){
     $list = $_POST['lists'];
     if($list == 'list1'){
         header("Location: ../index.php?mess=list1");
-        $stmt = $conn->prepare("INSERT INTO todos(title) VALUE(?)");
+        $stmt = $conn->prepare("INSERT INTO todos(list) VALUE(?)"); //we connect our todos list to the lists
         $res = $stmt->execute([$list]);
 
         if ($res){
@@ -20,7 +20,7 @@ if(isset($_POST['lists'])){
     }
     elseif ($list == 'list2'){
         header("Location: ../index.php?mess=list2");
-        $stmt = $conn->prepare("INSERT INTO todos(title) VALUE(?)");
+        $stmt = $conn->prepare("INSERT INTO todos(list) VALUE(?)");
         $res = $stmt->execute([$list]);
 
         if ($res){
@@ -34,7 +34,7 @@ if(isset($_POST['lists'])){
     }
     else{
         header("Location: ../index.php?mess=list3");
-        $stmt = $conn->prepare("INSERT INTO todos(title) VALUE(?)");
+        $stmt = $conn->prepare("INSERT INTO todos(list) VALUE(?)");
         $res = $stmt->execute([$list]);
 
         if ($res){

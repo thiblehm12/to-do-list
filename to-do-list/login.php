@@ -20,11 +20,11 @@
     </form>
   <?php
     // Error messages
-    if (isset($_GET["error"])) {
-      if ($_GET["error"] == "emptyinput") {
+    if (isset($_GET["error"])) { //we do different test to be sure that the user enter the right informations
+      if ($_GET["error"] == "emptyinput") { //if sthg is entered
         echo "<p>Fill in all fields!</p>";
       }
-      else if ($_GET["error"] == "wronglogin") {
+      else if ($_GET["error"] == "wronglogin") { //if the login is equal to the password
         echo "<p>Wrong login or password!</p>";
       }
     }

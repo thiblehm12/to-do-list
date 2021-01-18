@@ -34,33 +34,30 @@
     </form>
     <?php
     // Error messages
-      if (isset($_GET["error"])) {
-      if ($_GET["error"] == "emptyinput") {
+      if (isset($_GET["error"])) { //We do a serie of test to be sure that the informations are valid and everything is check grom the url
+      if ($_GET["error"] == "emptyinput") { // We check if shtg is entered 
         echo "<p>Fill in all fields!</p>";
       }
-      else if ($_GET["error"] == "invaliduid") {
+      else if ($_GET["error"] == "invaliduid") { // if the username is valid
         echo "<p>Choose a proper username!</p>";
       }
-      else if ($_GET["error"] == "invalidemail") {
+      else if ($_GET["error"] == "invalidemail") { // if the email is valid
         echo "<p>Choose a proper email!</p>";
       }
       
-      else if ($_GET["error"] == "stmtfailed") {
+      else if ($_GET["error"] == "stmtfailed") {  //shtg that we don't know
         echo "<p>Something went wrong!</p>";
       }
-      else if ($_GET["error"] == "usernametaken") {
+      else if ($_GET["error"] == "usernametaken") { //if the username is already used
         echo "<p>Username already taken!</p>";
       }
-      else if ($_GET["error"] == "none") {
+      else if ($_GET["error"] == "none") { //else everithyng is good so u are signed up
         echo "<p>You have signed up!</p>";
       }
     }
   ?>
   </div>
-  <!-- <?php
-        include_once 'sidebar.php';
-  ?> -->
-
+  
   
   
 </section>

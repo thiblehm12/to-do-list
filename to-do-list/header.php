@@ -1,5 +1,5 @@
 <?php
-  session_start();
+  session_start(); //use of session
   include_once 'includes/functions.inc.php';
   $page = strrchr($_SERVER['SCRIPT_NAME'], '/');
 ?>
@@ -28,7 +28,17 @@
     
       <div class="navbar">
         <!-- <a href="index.php"><img src="images/logo1.png" alt="thibaut" width="100px"></a> -->
-        <img src="images/logo2.png" onclick="redirect3()" class="logo">
+        <img src="images/logo2.png" 
+          <?php 
+                
+                if (isset($_SESSION["useruid"])) { //if the user is connected
+                    echo ' onclick="redirect3()"'; // we send him on the todolist
+                }
+                else{
+                    echo 'onclick="redirect7()"'; //else on the login / signup form
+                }
+            ?>
+        class="logo">
         <ul>
           
           <?php

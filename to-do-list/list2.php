@@ -10,7 +10,6 @@
     <title>List 2</title>
     <link rel="stylesheet" href="css/style.css">
     <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
-
 </head>
 <body>
     <div class="navbar">
@@ -25,7 +24,6 @@
                     echo '<button id="btn1" type="button" onclick="redirect()">Sign Up</button>';
                 }
             ?>
-        
     </div>
     <div class="main-section">
         

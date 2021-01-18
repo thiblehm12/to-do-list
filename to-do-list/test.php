@@ -1,3 +1,9 @@
+
+<!-- This page is a test page to do try some modifications that i'm not 
+sure about before pushing it on github even if i can do it directly from there -->
+
+
+
 <?php
     require 'db_conn.php';
 ?>

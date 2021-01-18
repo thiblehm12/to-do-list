@@ -1,8 +1,8 @@
 $(document).ready(function(){
-    $('.remove-to-do').click(function(){
+    $('.remove-to-do').click(function(){ //if the attibut id is clicked
         const id = $(this).attr('id');
         
-        $.post("app/remove.php",{ 
+        $.post("app/remove.php",{  //we send the user on the page remove.php which is going to delete the tasks selected
             id: id
         },
         (data) => {
@@ -12,10 +12,10 @@ $(document).ready(function(){
         }
         );
     });
-    $(".check-box").click(function(e){
+    $(".check-box").click(function(e){ //if checkbox is checked
         const id =  $(this).attr('data-todo-id');
         
-        $.post('app/check.php',
+        $.post('app/check.php', //we apply the function in check.php
             {
                 id: id 
             },
@@ -58,6 +58,9 @@ function redirect5() {
 }
 function redirect6() {
     window.location = "logout.php";
+}
+function redirect7() {
+    window.location = "landing.php";
 }
 
 

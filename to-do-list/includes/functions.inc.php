@@ -40,19 +40,19 @@ function invalidEmail($email) {
 // Check if username is in database, if so then return data
 function uidExists($conn, $username) {
   $sql = "SELECT * FROM users WHERE usersUid = ? OR usersEmail = ?;";
-	$stmt = mysqli_stmt_init($conn);
-	if (!mysqli_stmt_prepare($stmt, $sql)) {
+	$stmt = mysqli_stmt_init($conn);  //Initializes a statement and returns an object for use with mysqli_stmt_prepare
+	if (!mysqli_stmt_prepare($stmt, $sql)) {// Prepare an SQL statement for execution
 		header("location: ../signup.php?error=stmtfailed");
 		exit();
 	}
 
-	mysqli_stmt_bind_param($stmt, "ss", $username, $email);
-	mysqli_stmt_execute($stmt);
+	mysqli_stmt_bind_param($stmt, "ss", $username, $email); //Binds variables to a prepared statement as parameters
+	mysqli_stmt_execute($stmt); //Executes a prepared Query
 
 	// "Get result" returns the results from a prepared statement
-	$resultData = mysqli_stmt_get_result($stmt);
+	$resultData = mysqli_stmt_get_result($stmt); 
 
-	if ($row = mysqli_fetch_assoc($resultData)) {
+	if ($row = mysqli_fetch_assoc($resultData)) { //Fetch a result row as an associative array
 		return $row;
 	}
 	else {
@@ -60,7 +60,7 @@ function uidExists($conn, $username) {
 		return $result;
 	}
 
-	mysqli_stmt_close($stmt);
+	mysqli_stmt_close($stmt); //Closes a prepared statement
 }
 
 
@@ -69,18 +69,18 @@ function uidExists($conn, $username) {
 function createUser($conn, $username, $email, $pwd) {
   $sql = "INSERT INTO users (usersUid, usersEmail, usersPwd) VALUES (?, ?, ?);";
 
-	$stmt = mysqli_stmt_init($conn);
-	if (!mysqli_stmt_prepare($stmt, $sql)) {
+	$stmt = mysqli_stmt_init($conn);//Initializes a statement and returns an object for use with mysqli_stmt_prepare 
+	if (!mysqli_stmt_prepare($stmt, $sql)) { // if the sql stmt isn't executed
 	 	header("location: ../signup.php?error=stmtfailed");
 		exit();
 	}
 
-	$hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
+	$hashedPwd = password_hash($pwd, PASSWORD_DEFAULT); //hashed the pwd
 
-	mysqli_stmt_bind_param($stmt, "sss", $username, $email, $hashedPwd);
-	mysqli_stmt_execute($stmt);
-	mysqli_stmt_close($stmt);
-	mysqli_close($conn);
+	mysqli_stmt_bind_param($stmt, "sss", $username, $email, $hashedPwd); //Binds variables to a prepared statement as parameters
+	mysqli_stmt_execute($stmt); //Executes a prepared Query
+	mysqli_stmt_close($stmt); //Closes a prepared statement
+	mysqli_close($conn); //Closes the function
 	header("location: ../signup.php?error=none");
 	exit();
 }
@@ -107,7 +107,7 @@ function loginUser($conn, $username, $pwd) {
 	}
 
 	$pwdHashed = $uidExists["usersPwd"];
-	$checkPwd = password_verify($pwd, $pwdHashed);
+	$checkPwd = password_verify($pwd, $pwdHashed); 
 
 	if ($checkPwd === false) {
 		header("location: ../login.php?error=wronglogin");
